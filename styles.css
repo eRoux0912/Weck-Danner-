@@ -1,0 +1,911 @@
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Base body font */
+body {
+  font-family: "Inter", sans-serif;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Lora", serif;
+  font-weight: 600;
+}
+
+/* Navbar */
+
+.navbar-nav .nav-link,
+.navbar-contact a,
+.navbar-contact-mobile a {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+}
+
+.navbar-contact a,
+.navbar-contact-mobile a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navbar overlay state (top of page, over carousel) */
+.navbar {
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); /* Safari support */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Solid state: after scrolling past the carousel */
+.navbar.navbar-solid {
+  background-color: #ffffff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Solid state: while the mobile menu is open or opening.
+   Kept as its own rule so an older browser that doesn't understand :has()
+   can't cancel the scroll rule above. */
+.navbar:has(.navbar-collapse.show),
+.navbar:has(.navbar-collapse.collapsing) {
+  background-color: #ffffff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 991.98px) {
+  .navbar-brand-toggle-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto; /* keeps the whole group centered in the flex row */
+  }
+
+  .navbar-toggler {
+    margin-top: 0.5rem;
+  }
+
+  /* Mobile menu links: full-width rows with bigger tap targets */
+  .navbar-nav {
+    margin-top: 0.75rem;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    text-align: center;
+  }
+
+  .navbar-nav .nav-item:last-child .nav-link {
+    border-bottom: 0;
+  }
+
+  /* Tap feedback (touch screens don't have hover) */
+  .navbar-nav .nav-link:active {
+    background-color: rgba(138, 109, 59, 0.1);
+    color: var(--bd-primary, #8a6d3b);
+  }
+
+  /* Phone and email links at the bottom of the menu */
+  .navbar-contact-mobile {
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding-top: 0.75rem;
+  }
+
+  .navbar-contact-mobile a {
+    padding: 0.4rem 0;
+  }
+}
+
+/* Carousel */
+
+.carousel-item img {
+  width: 100%;
+  height: 80vh;
+  max-height: 800px;
+  object-fit: cover;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.carousel-caption-custom {
+  position: absolute;
+  top: 50%;
+  left: 6%;
+  transform: translateY(-50%);
+  text-align: left;
+  max-width: 380px;
+  color: #ffffff;
+  z-index: 2;
+  pointer-events: none; /* so it doesn't block clicks on the image/indicators */
+}
+
+.carousel-caption-custom h5 {
+  font-family: "Lora", serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-caption-custom p {
+  font-family: "Inter", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin: 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-caption-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.25) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  z-index: 1;
+  pointer-events: none; /* so it doesn't block clicks on the image/indicators */
+}
+
+.carousel-caption-custom {
+  z-index: 2; /* sits above the overlay */
+}
+
+/* Scale down on smaller screens */
+@media (max-width: 767.98px) {
+  .carousel-caption-custom {
+    left: 5%;
+    max-width: 80%;
+  }
+  .carousel-caption-custom h5 {
+    font-size: 1.2rem;
+  }
+  .carousel-caption-custom p {
+    font-size: 0.85rem;
+  }
+}
+
+.carousel-indicators {
+  bottom: 20px; /* lift slightly off the bottom edge */
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%; /* circular dots instead of Bootstrap's thin bars */
+  background-color: rgba(255, 255, 255, 0.6);
+  border: none;
+  margin: 0 6px;
+  opacity: 1;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-indicators [data-bs-target]:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.15);
+}
+
+.carousel-indicators .active {
+  background-color: #ffffff;
+  transform: scale(1.3);
+}
+
+/* removes pointer events on carousel indicators for small screens to prevent accidental clicks when swiping */
+
+@media (max-width: 767.98px) {
+  .carousel-indicators [data-bs-target] {
+    pointer-events: none;
+  }
+}
+
+/* stats strip */
+
+.stats-strip {
+  background-color: #f7f8fa;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.stat-icon {
+  color: var(--bd-primary, #8a6d3b); /* tie this to your brand accent */
+  opacity: 0.85;
+}
+
+.stats-strip .stat-number {
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+}
+
+.stats-strip .stat-label {
+  letter-spacing: 0.08em;
+  color: #6b7280;
+}
+
+/* divider between stat blocks */
+
+.stats-strip .col {
+  position: relative;
+}
+
+.stats-strip .col:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 60%;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* On mobile (2 columns), only show divider between the pair in each row, not before col 3 */
+@media (max-width: 767.98px) {
+  .stats-strip .col:nth-child(odd)::before {
+    display: none;
+  }
+}
+
+/* About section */
+.about-section {
+  background-color: #f7f8fa;
+}
+
+.about-img {
+  width: 100%;
+  object-fit: cover;
+  max-height: 480px;
+}
+
+/* Trust Row */
+
+.about-trust-caption {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+}
+
+.about-kicker {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bd-primary, #8a6d3b);
+  margin-bottom: 0.5rem;
+}
+
+/* reviews button */
+
+.reviews-google-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--bd-primary, #8a6d3b);
+  border-radius: 50%;
+  color: var(--bd-primary, #8a6d3b);
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .reviews-google-link:hover {
+    background-color: var(--bd-primary, #8a6d3b);
+    color: #ffffff;
+  }
+}
+
+/* Reviews section */
+
+.reviews-marquee {
+  overflow: hidden;
+  width: 100%;
+  /* fades the edges so cards don't just abruptly appear/disappear */
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.reviews-track {
+  display: flex;
+  width: max-content; /* lets the row extend as wide as its content needs, no wrapping */
+  animation: reviews-scroll 45s linear infinite;
+  will-change: transform;
+}
+
+/* Pause the scroll when someone hovers */
+.reviews-marquee:hover .reviews-track {
+  animation-play-state: paused;
+}
+
+@keyframes reviews-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.review-card {
+  flex: 0 0 300px; /* fixed width, never shrinks or grows */
+  margin-right: 1.5rem;
+  background-color: #f7f8fa;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.review-stars {
+  color: var(--bd-primary, #8a6d3b);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.review-quote {
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.review-author {
+  font-family: "Lora", serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+/* Reduced Motion Code */
+@media (prefers-reduced-motion: reduce) {
+  .reviews-track {
+    animation: none;
+  }
+}
+
+/* appointment CTA  */
+
+.btn-booking {
+  display: inline-block;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  background-color: var(--bd-primary, #8a6d3b);
+  border: 1px solid var(--bd-primary, #8a6d3b);
+  border-radius: 2rem;
+  padding: 0.75rem 2.25rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-booking:hover {
+    background-color: #6f5730; /* slightly darker shade of the brand accent */
+    color: #ffffff;
+  }
+}
+
+.btn-booking:active {
+  transform: scale(0.97);
+}
+
+/* Services section */
+
+.services-section {
+  background-color: #ffffff;
+}
+
+.services-intro {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #6b7280;
+}
+
+.service-card {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  background-color: #f7f8fa;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 1rem;
+  padding: 1.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--bd-primary, #8a6d3b);
+}
+
+.service-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(138, 109, 59, 0.1);
+  color: var(--bd-primary, #8a6d3b);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.service-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.6rem;
+}
+
+.service-card p {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* equipment strip */
+
+.equipment-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.equipment-caption {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+/* Lenses section */
+
+.lenses-section {
+  background-color: #f7f8fa;
+}
+
+.lenses-intro {
+  max-width: 640px;
+  color: #4b5563;
+}
+
+.lens-type-card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 2rem;
+  border-top: 4px solid var(--bd-primary, #8a6d3b);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lens-type-card h3 {
+  margin: 1rem 0 1.25rem;
+  font-size: 1.35rem;
+}
+
+.lens-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lens-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-family: "Inter", sans-serif;
+  color: #333;
+}
+
+.lens-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--bd-primary, #8a6d3b);
+}
+
+/* Brand logo strip */
+
+.brand-logo-card {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  height: 90px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.brand-logo-card img {
+  max-height: 40px;
+  max-width: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lens-type-card:hover,
+  .brand-logo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* Frames section */
+
+.frames-section {
+  background-color: #ffffff;
+}
+
+.frame-feature-img {
+  width: 100%;
+  object-fit: cover;
+  max-height: 480px;
+}
+
+.frames-gallery-img {
+  width: 100%;
+  object-fit: cover;
+  height: 280px;
+}
+
+.frames-gallery-caption {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* Care section */
+
+.care-section {
+  background-color: #f7f8fa;
+}
+
+.care-intro {
+  max-width: 640px;
+  color: #4b5563;
+}
+
+/* Photos: fixed crop so they never dominate the layout */
+.care-img-portrait {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 30%; /* keeps the boxes in frame */
+}
+
+.care-banner {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  object-position: center 55%;
+}
+
+@media (max-width: 767.98px) {
+  .care-banner {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Cards */
+.care-card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  border-top: 4px solid var(--bd-primary, #8a6d3b);
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .care-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.care-card-title {
+  font-size: 1.15rem;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.care-card-text {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin: 0;
+}
+
+/* Brand + CTA */
+.care-brand-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 0.75rem;
+}
+
+.care-cta-text {
+  color: #4b5563;
+}
+
+
+/* Sticky nav: stop anchor links landing underneath it */
+section[id] {
+  scroll-margin-top: 90px; /* adjust to your navbar height */
+}
+
+/* Contact section */
+
+.contact-section {
+  background-color: #ffffff;
+}
+
+.contact-intro {
+  max-width: 560px;
+  color: #4b5563;
+}
+
+/* Map */
+.contact-map {
+  display: block;
+  width: 100%;
+  height: 320px;
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Details */
+.contact-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+.contact-item > i {
+  font-size: 1.4rem;
+  line-height: 1.2;
+}
+
+.contact-item-title {
+  font-size: 1.05rem;
+  margin: 0 0 0.25rem;
+}
+
+.contact-item-text {
+  color: #4b5563;
+}
+
+.contact-link {
+  color: var(--bd-primary, #8a6d3b);
+  text-decoration: none;
+  font-weight: 500;
+  overflow-wrap: anywhere; /* stops the long email causing sideways scroll on small phones */
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contact-link:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Form card */
+.contact-form-card {
+  background-color: #f7f8fa;
+  border-radius: 1rem;
+  border-top: 4px solid var(--bd-primary, #8a6d3b);
+  padding: 2rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.contact-form-card .form-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.contact-optional {
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.contact-form-card .form-control,
+.contact-form-card .form-select {
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.6rem;
+}
+
+/* Brand-coloured focus ring instead of Bootstrap's default blue */
+.contact-form-card .form-control:focus,
+.contact-form-card .form-select:focus {
+  border-color: var(--bd-primary, #8a6d3b);
+  box-shadow: 0 0 0 0.2rem rgba(138, 109, 59, 0.2);
+}
+
+.contact-form-card .btn-booking {
+  width: 100%;
+  cursor: pointer;
+}
+
+.contact-note {
+  font-size: 0.85rem;
+  color: #6b7280;
+  text-align: center;
+}
+
+.contact-form-card .form-control::placeholder {
+  color: #6b7280;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* Footer (dark) */
+
+.site-footer {
+  --footer-accent: #c9a96e; /* lighter tint of the brand gold, readable on dark */
+  background-color: #1a1a1a;
+  border-top: 4px solid var(--bd-primary, #8a6d3b);
+  color: #d1d5db;
+}
+
+/* White tile so the logo stays unchanged */
+.footer-logo-tile {
+  display: inline-block;
+  background-color: #ffffff;
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.75rem;
+  line-height: 0;
+}
+
+.footer-tagline {
+  max-width: 280px;
+  margin-bottom: 1rem;
+}
+
+.footer-heading {
+  font-family: "Inter", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--footer-accent);
+  margin-bottom: 1rem;
+}
+
+/* Icons in the contact list */
+.site-footer .stat-icon {
+  color: var(--footer-accent);
+  opacity: 1;
+}
+
+/* Social icons */
+.footer-social {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--footer-accent);
+  border-radius: 50%;
+  color: var(--footer-accent);
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Quick links + contact + legal */
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a,
+.footer-contact a,
+.footer-legal a {
+  color: #d1d5db;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.footer-contact li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.footer-contact i {
+  margin-top: 0.15rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer-social a:hover {
+    background-color: var(--footer-accent);
+    color: #1a1a1a;
+  }
+
+  .footer-links a:hover,
+  .footer-contact a:hover,
+  .footer-legal a:hover,
+  .dev-credit a:hover {
+    color: var(--footer-accent);
+    text-decoration: underline;
+  }
+}
+
+/* Bottom bar */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+}
+
+@media (min-width: 992px) {
+  .footer-legal {
+    justify-content: flex-end;
+  }
+}
+
+/* Developer credit */
+.dev-credit {
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.dev-credit img {
+  border-radius: 0.5rem;
+}
+
+.dev-credit a {
+  color: #d1d5db;
+  font-weight: 500;
+}
