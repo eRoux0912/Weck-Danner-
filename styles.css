@@ -1,6 +1,10 @@
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px;
+}
+
+/* Sticky nav: stop anchor links landing underneath it */
+section[id] {
+  scroll-margin-top: 60px; /* adjust to your navbar height */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -35,6 +39,60 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
 }
 
+/* Scrollspy: active section highlight (same effect on desktop and mobile) */
+
+.navbar-nav .nav-link {
+  position: relative;
+}
+
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  background-color: var(--bd-primary, #8a6d3b);
+  transform: scaleX(0);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.navbar-nav .nav-link.active {
+  color: var(--bd-primary, #8a6d3b);
+}
+
+.navbar-nav .nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* Desktop: line spans the link */
+@media (min-width: 992px) {
+  .navbar-nav .nav-link::after {
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.25rem;
+  }
+}
+
+/* Mobile: short centred bar under the text */
+@media (max-width: 991.98px) {
+  .navbar-nav .nav-link::after {
+    left: 50%;
+    width: 2.5rem;
+    margin-left: -1.25rem;
+    bottom: 0.5rem;
+  }
+}
+
+/* Mouse only: half-strength preview line on hover */
+@media (min-width: 992px) and (hover: hover) and (pointer: fine) {
+  .navbar-nav .nav-link:hover::after {
+    transform: scaleX(1);
+    opacity: 0.5;
+  }
+
+  .navbar-nav .nav-link.active:hover::after {
+    opacity: 1;
+  }
+}
+
 /* Navbar overlay state (top of page, over carousel) */
 .navbar {
   background-color: rgba(255, 255, 255, 0.7);
@@ -66,14 +124,22 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 991.98px) {
   .navbar-brand-toggle-wrap {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr; /* left spacer | logo | toggler side */
     align-items: center;
-    margin: 0 auto; /* keeps the whole group centered in the flex row */
+    width: 100%;
+    align-self: flex-start; /* stops the row shifting when the menu opens */
+  }
+
+  .navbar-brand-toggle-wrap .navbar-brand {
+    grid-column: 2;
+    margin: 0;
   }
 
   .navbar-toggler {
-    margin-top: 0.5rem;
+    grid-column: 3;
+    justify-self: end;
+    margin: 0 0.25rem 0 0;
   }
 
   /* Mobile menu links: full-width rows with bigger tap targets */
@@ -83,12 +149,7 @@ h1, h2, h3, h4, h5, h6 {
 
   .navbar-nav .nav-link {
     padding: 0.9rem 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     text-align: center;
-  }
-
-  .navbar-nav .nav-item:last-child .nav-link {
-    border-bottom: 0;
   }
 
   /* Tap feedback (touch screens don't have hover) */
@@ -108,6 +169,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0.4rem 0;
   }
 }
+
 
 /* Carousel */
 
@@ -663,12 +725,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .care-cta-text {
   color: #4b5563;
-}
-
-
-/* Sticky nav: stop anchor links landing underneath it */
-section[id] {
-  scroll-margin-top: 90px; /* adjust to your navbar height */
 }
 
 /* Contact section */
