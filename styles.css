@@ -378,36 +378,37 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Reviews section */
+/* Reviews section animations */
 
 .reviews-marquee {
   overflow: hidden;
   width: 100%;
-  /* fades the edges so cards don't just abruptly appear/disappear */
-  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
 }
 
 .reviews-track {
   display: flex;
-  width: max-content; /* lets the row extend as wide as its content needs, no wrapping */
-  animation: reviews-scroll 45s linear infinite;
-  will-change: transform;
-}
-
-/* Pause the scroll when someone hovers */
-.reviews-marquee:hover .reviews-track {
-  animation-play-state: paused;
+  gap: 1.5rem;
+  padding-right: 1.5rem;
+  width: max-content;
+  animation: reviews-scroll 60s linear infinite;
 }
 
 @keyframes reviews-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .reviews-marquee:hover .reviews-track { animation-play-state: paused; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reviews-marquee { overflow-x: auto; }
+  .reviews-track { animation: none; }
 }
 
 .review-card {
-  flex: 0 0 300px; /* fixed width, never shrinks or grows */
-  margin-right: 1.5rem;
+  flex: 0 0 300px;
   background-color: #f7f8fa;
   border-radius: 1rem;
   padding: 1.5rem;
@@ -603,6 +604,19 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--bd-primary, #8a6d3b);
 }
 
+/* safety callout */
+
+.safety-callout {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  color: #4b5563;
+}
+
 /* Brand logo strip */
 
 .brand-logo-card {
@@ -619,7 +633,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .brand-logo-card img {
-  max-height: 40px;
+  max-height: 50px;
   max-width: 100%;
   width: auto;
   object-fit: contain;
@@ -642,18 +656,6 @@ h1, h2, h3, h4, h5, h6 {
 .frame-feature-img {
   width: 100%;
   object-fit: cover;
-  max-height: 480px;
-}
-
-.frames-gallery-img {
-  width: 100%;
-  object-fit: cover;
-  height: 280px;
-}
-
-.frames-gallery-caption {
-  font-size: 0.9rem;
-  color: #6b7280;
 }
 
 /* Care section */
@@ -724,6 +726,10 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   color: #6b7280;
   margin-bottom: 0.75rem;
+}
+
+.care-brand-row {
+  max-width: 720px;
 }
 
 .care-cta-text {
@@ -875,10 +881,41 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
 }
 
-/* Social icons */
-.footer-social {
-  display: flex;
-  gap: 0.75rem;
+/* Facebook: its official blue */
+.footer-social .social-facebook {
+  color: #1877f2;
+  border-color: #1877f2;
+}
+
+/* Instagram: gradient painted inside the icon shape */
+.footer-social .social-instagram {
+  border-color: #e4405f;
+}
+
+.footer-social .social-instagram i {
+  background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Hover: fill with a brand colour, icon goes white */
+@media (hover: hover) and (pointer: fine) {
+  .footer-social .social-facebook:hover {
+    background-color: #1877f2;
+    color: #ffffff;
+  }
+
+  .footer-social .social-instagram:hover {
+    background-color: #e4405f;
+  }
+
+  .footer-social .social-instagram:hover i {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
 }
 
 .footer-social a {
@@ -967,4 +1004,36 @@ h1, h2, h3, h4, h5, h6 {
 .dev-credit a {
   color: #d1d5db;
   font-weight: 500;
+}
+
+/* Whatsapp logo floating button styles  */
+
+.whatsapp-float {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  z-index: 1020;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #25d366;
+  color: #ffffff;
+  font-size: 1.9rem;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease;
+}
+
+.whatsapp-float:active {
+  transform: scale(0.94);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .whatsapp-float:hover {
+    transform: scale(1.08);
+    color: #ffffff;
+  }
 }
