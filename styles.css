@@ -381,8 +381,13 @@ h1, h2, h3, h4, h5, h6 {
 /* Reviews section animations */
 
 .reviews-marquee {
-  overflow: hidden;
+  overflow-x: auto;
   width: 100%;
+  scrollbar-width: none;        /* Firefox */
+}
+
+.reviews-marquee::-webkit-scrollbar {
+  display: none;                /* Safari and Chrome */
 }
 
 .reviews-track {
@@ -390,24 +395,6 @@ h1, h2, h3, h4, h5, h6 {
   gap: 1.5rem;
   padding-right: 1.5rem;
   width: max-content;
-  animation: reviews-scroll 60s linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-@keyframes reviews-scroll {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(-50%, 0, 0); }
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .reviews-marquee:hover .reviews-track { animation-play-state: paused; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reviews-marquee { overflow-x: auto; }
-  .reviews-track { animation: none; }
 }
 
 .review-card {
@@ -416,7 +403,6 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 1rem;
   padding: 1.5rem;
   border: 1px solid rgba(0, 0, 0, 0.06);
-  transform: translateZ(0);
 }
 
 .review-stars {
