@@ -391,6 +391,9 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 1.5rem;
   width: max-content;
   animation: reviews-scroll 60s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 @keyframes reviews-scroll {
@@ -412,7 +415,8 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #f7f8fa;
   border-radius: 1rem;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transform: translateZ(0);
 }
 
 .review-stars {
