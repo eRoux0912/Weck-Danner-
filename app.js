@@ -68,9 +68,14 @@ marquee.addEventListener('touchstart', () => {
   clearTimeout(resumeTimer);
   paused = true;
 }, { passive: true });
-marquee.addEventListener('touchend', () => {
+
+// touchend = finger lifted, touchcancel = the browser took the touch over (iOS does this)
+function resumeAfterTouch() {
+  clearTimeout(resumeTimer);
   resumeTimer = setTimeout(() => { paused = false; }, 2000);
-});
+}
+marquee.addEventListener('touchend', resumeAfterTouch);
+marquee.addEventListener('touchcancel', resumeAfterTouch);
 
 if (marquee && !reducedMotion) {
   requestAnimationFrame(scrollReviews);

@@ -787,15 +787,6 @@
 
     </div>
 
-    <!-- Landscape banner -->
-    <div class="mt-5">
-      <img src="media/weck-danner-vredenburg-hy-care-solution-display.webp"
-           class="img-fluid rounded-4 shadow-sm care-banner"
-            width="1600" height="900"
-           alt="Contact lens solution, a Zeiss reading test card and Weck & Danner business cards on display in the practice"
-           loading="lazy">
-    </div>
-
     <!-- Brand + CTA -->
 <div class="text-center mt-5">
   <p class="care-brand-label">Care products from</p>
@@ -891,7 +882,7 @@
       <div class="col-lg-6 order-1 order-lg-2">
         <div class="contact-form-card">
 
-          <form name="appointment" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+          <form name="appointment" method="POST" action="/thank-you.html" data-netlify="true" data-netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="appointment">
 
             <!-- Honeypot: hidden from people, bots fill it in -->
@@ -939,7 +930,7 @@
             </div>
 
             <!-- NEW: consent line -->
-            <p class="contact-note mb-3">By submitting this form, you agree that we may use your details to respond to your request, as set out in our <a href="privacy-policy.html" class="contact-link">Privacy Policy</a>.</p>
+            <p class="contact-note mb-3">By submitting this form, you agree that we may use your details to respond to your request, as set out in our <a href="assets/weck-danner-privacy-policy.pdf" target="_blank" rel="noopener noreferrer" class="contact-link">Privacy Policy</a>.</p>
 
             <button type="submit" class="btn-booking">Request Appointment</button>
             <p class="contact-note mt-3 mb-0">This is a request, not a confirmed booking. We'll contact you to confirm a time.</p>
@@ -1014,14 +1005,14 @@
 
         <div class="col-lg-6">
           <ul class="footer-legal list-unstyled mb-0">
-            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="assets/weck-danner-privacy-policy.pdf" target="_blank" rel="noopener noreferrer">Privacy Policy</a></li>
             <li>
-              <a href="documents/weck-danner-practice-disclaimer.pdf" target="_blank" rel="noopener">
+              <a href="assets/weck-danner-practice-disclaimer.pdf" target="_blank" rel="noopener noreferrer">
                 Disclaimer<span class="visually-hidden"> (PDF, opens in a new tab)</span>
               </a>
             </li>
             <li>
-              <a href="documents/weck-danner-paia-manual.pdf" target="_blank" rel="noopener">
+              <a href="assets/weck-danner-paia-manual.pdf" target="_blank" rel="noopener noreferrer">
                 PAIA Manual<span class="visually-hidden"> (PDF, opens in a new tab)</span>
               </a>
             </li>
@@ -1067,7 +1058,7 @@
 
    <!-- custom script -->
 
-   <script src="app.js?v=2"></script>
+   <script src="app.js?v=3"></script>
 
 </body>
 </html>
