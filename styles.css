@@ -398,6 +398,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .review-card {
+  width: 300px; 
   flex: 0 0 300px;
   background-color: #f7f8fa;
   border-radius: 1rem;
@@ -424,13 +425,6 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.9rem;
   color: #1a1a1a;
   margin: 0;
-}
-
-/* Reduced Motion Code */
-@media (prefers-reduced-motion: reduce) {
-  .reviews-track {
-    animation: none;
-  }
 }
 
 /* appointment CTA  */
