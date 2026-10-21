@@ -2,6 +2,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* W&D Logos */
+.navbar-brand img,
+.footer-logo-tile img {
+  height: 64px;
+  width: auto;
+}
+
 /* Sticky nav: stop anchor links landing underneath it */
 section[id] {
   scroll-margin-top: 60px; /* adjust to your navbar height */

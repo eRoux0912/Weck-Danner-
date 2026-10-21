@@ -35,7 +35,7 @@ let position = 0;      // the counter, so it can hold decimals
 let lastTime = 0;      // time of the previous frame
 let paused = false;
 let resumeTimer;       // used to resume after a touch
-const speed = 50;      // pixels per second
+const speed = 60;      // pixels per second
 
 
 function scrollReviews(time) {
@@ -85,6 +85,45 @@ if (marquee && !reducedMotion) {
 
 
 
+
+// active nav link (custom scrollspy)
+const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+const spySections = document.querySelectorAll('main section[id]');
+
+function updateActiveLink() {
+  const readingLine = navbar.offsetHeight + 40; // just below the navbar
+  let currentId = '';
+
+  spySections.forEach(section => {
+    if (section.getBoundingClientRect().top <= readingLine) {
+      currentId = section.id;
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
+  });
+}
+
+window.addEventListener('scroll', updateActiveLink, { passive: true });
+window.addEventListener('resize', updateActiveLink);
+updateActiveLink();
+
+
+
+
+
+
+// date picker: block past dates
+const dateInput = document.getElementById('appt-date');
+
+if (dateInput) {
+  const now = new Date();
+  const yyyy = now.getFullYear();
+  const mm = String(now.getMonth() + 1).padStart(2, '0'); // months start at 0
+  const dd = String(now.getDate()).padStart(2, '0');
+  dateInput.min = `${yyyy}-${mm}-${dd}`;
+}
 
 
 
