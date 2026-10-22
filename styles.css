@@ -11,7 +11,7 @@ html {
 
 /* Sticky nav: stop anchor links landing underneath it */
 section[id] {
-  scroll-margin-top: 60px; /* adjust to your navbar height */
+  scroll-margin-top: 90px; /* adjust to your navbar height */
 }
 
 @media (prefers-reduced-motion: reduce) {
