@@ -1022,3 +1022,26 @@ h1, h2, h3, h4, h5, h6 {
   height: 64px;
   width: auto;
 }
+
+/* Animations */
+
+/* ===== Scroll reveal animations ===== */
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.js-reveal .reveal-left  { transform: translateX(-32px); }
+.js-reveal .reveal-right { transform: translateX(32px); }
+
+.js-reveal .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* stop the side slide-ins causing a horizontal scrollbar */
+.frames-section {
+  overflow-x: clip;
+}

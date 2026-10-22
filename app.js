@@ -127,6 +127,27 @@ if (dateInput) {
 
 
 
+// scroll reveal animations
+const revealItems = document.querySelectorAll('.reveal');
+
+if (revealItems.length && !reducedMotion && 'IntersectionObserver' in window) {
+  document.documentElement.classList.add('js-reveal');
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target); // animate once, then stop watching
+      }
+    });
+  }, {
+    threshold: 0.15,                     // 15% of the element must be on screen
+    rootMargin: '0px 0px -40px 0px'      // trigger slightly before the very bottom edge
+  });
+
+  revealItems.forEach(item => revealObserver.observe(item));
+}
+
 
 
 // footer year auto-update
