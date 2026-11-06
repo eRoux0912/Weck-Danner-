@@ -714,6 +714,105 @@ h1, h2, h3, h4, h5, h6 {
   color: #4b5563;
 }
 
+/* Medical aid & payment section */
+
+.medical-section {
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06); /* separates it from Contact, which is also white */
+}
+
+.medical-intro {
+  max-width: 640px;
+  color: #4b5563;
+}
+
+/* List flows into columns: 2 on phones, 3 on tablets, 4 on desktop */
+.medical-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 960px;
+  column-count: 2;
+  column-gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .medical-list { column-count: 3; }
+}
+
+@media (min-width: 992px) {
+  .medical-list { column-count: 4; }
+}
+
+.medical-list li {
+  break-inside: avoid; /* stops a long name splitting across two columns */
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  padding: 0.35rem 0;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+}
+
+.medical-list i {
+  color: var(--bd-primary, #8a6d3b);
+  flex-shrink: 0;
+}
+
+.medical-note {
+  max-width: 640px;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Payment card */
+.payment-card {
+  max-width: 720px;
+  background-color: #f7f8fa;
+  border-radius: 1rem;
+  border-top: 4px solid var(--bd-primary, #8a6d3b);
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.payment-title {
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+}
+
+.payment-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.payment-text {
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+.pay-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 140px; /* same width for all four */
+  height: 48px;     /* same height for all four */
+  padding: 0 1.25rem;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.pay-pill img {
+  height: 18px;
+  width: auto;
+}
+
 /* Contact section */
 
 .contact-section {
